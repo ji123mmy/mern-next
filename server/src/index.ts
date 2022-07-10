@@ -5,7 +5,6 @@ import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { WebSocketServer } from "ws";
 import { useServer } from "graphql-ws/lib/use/ws";
-import { PubSub } from 'graphql-subscriptions';
 import cors from "cors";
 import mongoose from "mongoose";
 import * as dotenv from "dotenv";
@@ -26,7 +25,6 @@ mongoose
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 const app = express();
 const httpServer = createServer(app);
-const pubsub = new PubSub()
 
 
 const wsServer = new WebSocketServer({
@@ -42,7 +40,7 @@ app.use(urlencoded({ extended: true }));
 async function startServer() {
   const server = new ApolloServer({
     schema,
-    context: ({ req }) => ({ req, pubsub }),
+    context: ({ req }) => ({ req }),
     csrfPrevention: true,
     cache: "bounded",
     plugins: [
