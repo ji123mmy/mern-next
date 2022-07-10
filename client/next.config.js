@@ -23,6 +23,7 @@ const nextConfig = {
     });
     return config;
   },
+  pageExtensions: ["page.tsx", "page.js"],
   env: {
     serverUri: "https://strange-mind-351407.de.r.appspot.com/graphql",
   },
