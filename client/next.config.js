@@ -5,11 +5,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/home',
+        source: "/",
+        destination: "/home",
         permanent: true,
       },
-    ]
+    ];
   },
   webpack: (config, options) => {
     config.module.rules.push({
@@ -22,6 +22,9 @@ const nextConfig = {
       ],
     });
     return config;
+  },
+  env: {
+    serverUri: "https://strange-mind-351407.de.r.appspot.com/graphql",
   },
 };
 
