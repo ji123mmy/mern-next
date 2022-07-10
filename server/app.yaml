@@ -6,7 +6,8 @@ env_variables:
   DB_URI: "mongodb+srv://Jimmy:RBAi1J1NvPUS7nZH@cluster0.dx0mx.mongodb.net/testDB?retryWrites=true&w=majority"
   JWT_SECRET: "very secret key"
 
-- url: /.*
-  secure: always
-  redirect_http_response_code: 301
-  script: auto
+handlers:
+  - url: /.*
+    secure: always
+    redirect_http_response_code: 301
+    script: auto
