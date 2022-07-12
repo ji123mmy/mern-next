@@ -15,11 +15,11 @@ CD: Vercel, Google Cloud Platform SDK
 ## Project Screen Shot(s)
 [ Not Login ]
 
-[![alt text](./preview.png)]
+![alt text](./preview.png)
 
 [ With Login ]
 
-[![alt text](./preview2.png)]
+![alt text](./preview2.png)
 
 
 ## Installation and Setup Instructions
