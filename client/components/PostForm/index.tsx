@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Field, FieldProps } from "formik";
 import { Form, Button } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
@@ -13,11 +13,13 @@ import styles from "./index.module.scss";
 const { Input } = Form;
 
 const PostForm: React.FC = () => {
+  const [created, setCreated] = useState(false);
   const [createPost, { loading, error }] = useMutation(CREATE_POST, {
     update(caches, { data: { createPost: post } }) {
-      const data = caches.readQuery({ query: FETCH_POSTS }) as {
+      if (post) setCreated(true);
+      const data = (caches.readQuery({ query: FETCH_POSTS }) as {
         getPosts: Post[];
-      };
+      }) ?? { getPosts: [] };
       caches.writeQuery({
         query: FETCH_POSTS,
         data: {
@@ -29,6 +31,7 @@ const PostForm: React.FC = () => {
 
   const handleSubmitForm = (formValues: PostFormValuess): void => {
     createPost({ variables: formValues });
+    setCreated(false);
   };
 
   return (
@@ -47,8 +50,8 @@ const PostForm: React.FC = () => {
                 />
               )}
             </Field>
-            <Button type="submit" primary onClick={submitForm}>
-              Post
+            <Button name='post' type="submit" primary onClick={submitForm}>
+              {loading ? "Loading..." : "Post"}
             </Button>
           </Form>
         )}
@@ -57,6 +60,13 @@ const PostForm: React.FC = () => {
         <div className={classnames("ui error message", styles.error)}>
           <ul className="list">
             <li>{error?.graphQLErrors[0]?.message}</li>
+          </ul>
+        </div>
+      )}
+      {created && (
+        <div className={classnames("ui success message", styles.error)}>
+          <ul className="list">
+            <li> Post created!</li>
           </ul>
         </div>
       )}

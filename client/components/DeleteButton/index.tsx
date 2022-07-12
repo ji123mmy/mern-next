@@ -18,19 +18,22 @@ const DeleteButton: React.FC<Props> = ({
 }) => {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const router = useRouter();
-  const [deletePost, { loading: postLoading }] = useMutation(DELETE_POST, {
-    update(caches) {
-      const data = caches.readQuery({ query: FETCH_POSTS }) as {
-        getPosts: any[];
-      };
-      caches.writeQuery({
-        query: FETCH_POSTS,
-        data: {
-          getPosts: data.getPosts.filter((post) => post.id !== postId),
-        },
-      });
-    },
-  });
+  const [deletePost, { loading: postLoading, data }] = useMutation(
+    DELETE_POST,
+    {
+      update(caches) {
+        const data = caches.readQuery({ query: FETCH_POSTS }) as {
+          getPosts: any[];
+        };
+        caches.writeQuery({
+          query: FETCH_POSTS,
+          data: {
+            getPosts: data.getPosts.filter((post) => post.id !== postId),
+          },
+        });
+      },
+    }
+  );
   const [deleteComment, { loading: commentLoading }] =
     useMutation(DELETE_COMMENT);
 
@@ -43,9 +46,15 @@ const DeleteButton: React.FC<Props> = ({
       router.push("/home");
     }
   };
+
+  if (data?.deletePost) {
+    return <p>{data.deletePost}</p>;
+  }
+
   return (
     <>
       <Button
+        data-testid={`delete-button-${postId}`}
         as="div"
         color="red"
         floated="right"
@@ -59,6 +68,7 @@ const DeleteButton: React.FC<Props> = ({
           commentId ? "comment" : "post"
         }?`}
         open={confirmOpen}
+        confirmButton="Delete Post"
         onConfirm={handleDelete}
         onCancel={() => setConfirmOpen(false)}
       />
