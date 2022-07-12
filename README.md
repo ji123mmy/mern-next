@@ -50,4 +50,5 @@ Backtend: `localhost:3000`
 To Visit App With remote host:
 
 Frontend: `https://mern-next-104p6hs93-ji123mmy.vercel.app`  (Host: Vercel)
+
 Backtend: `https://strange-mind-351407.de.r.appspot.com/graphql`(Host: GCP)
