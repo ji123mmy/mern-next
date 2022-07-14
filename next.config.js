@@ -16,8 +16,8 @@ module.exports = (phase) => {
     case PHASE_PRODUCTION_BUILD:
     default:
       env = {
-        httpsUri: "https://strange-mind-351407.de.r.appspot.com/graphql",
-        wsUri: "wss://strange-mind-351407.de.r.appspot.com/subscriptions",
+        httpsUri: "https://mern-graphql-server.herokuapp.com/graphql",
+        wsUri: "wss://mern-graphql-server.herokuapp.com/subscriptions",
       };
       break;
   }
