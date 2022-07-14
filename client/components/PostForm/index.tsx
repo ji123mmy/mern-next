@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Formik, Field, FieldProps } from "formik";
 import { Form, Button } from "semantic-ui-react";
 import { useMutation } from "@apollo/client";
@@ -13,12 +13,12 @@ import styles from "./index.module.scss";
 const { Input } = Form;
 
 const PostForm: React.FC = () => {
-  const [created, setCreated] = useState(false);
-  const [createPost, { loading, error }] = useMutation(CREATE_POST);
+  const [createPost, { loading, error, data }] = useMutation(CREATE_POST);
+
+  const { createPost: newPost } = data ?? {};
 
   const handleSubmitForm = (formValues: PostFormValuess): void => {
     createPost({ variables: formValues });
-    setCreated(false);
   };
 
   return (
@@ -37,7 +37,7 @@ const PostForm: React.FC = () => {
                 />
               )}
             </Field>
-            <Button name='post' type="submit" primary onClick={submitForm}>
+            <Button name="post" type="submit" primary onClick={submitForm}>
               {loading ? "Loading..." : "Post"}
             </Button>
           </Form>
@@ -50,7 +50,7 @@ const PostForm: React.FC = () => {
           </ul>
         </div>
       )}
-      {created && (
+      {newPost && (
         <div className={classnames("ui success message", styles.error)}>
           <ul className="list">
             <li> Post created!</li>
