@@ -14,20 +14,7 @@ const { Input } = Form;
 
 const PostForm: React.FC = () => {
   const [created, setCreated] = useState(false);
-  const [createPost, { loading, error }] = useMutation(CREATE_POST, {
-    update(caches, { data: { createPost: post } }) {
-      if (post) setCreated(true);
-      const data = (caches.readQuery({ query: FETCH_POSTS }) as {
-        getPosts: Post[];
-      }) ?? { getPosts: [] };
-      caches.writeQuery({
-        query: FETCH_POSTS,
-        data: {
-          getPosts: [post, ...data.getPosts],
-        },
-      });
-    },
-  });
+  const [createPost, { loading, error }] = useMutation(CREATE_POST);
 
   const handleSubmitForm = (formValues: PostFormValuess): void => {
     createPost({ variables: formValues });

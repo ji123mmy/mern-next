@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const FETCH_POSTS = gql`
-  query getPosts {
-    getPosts {
+export const POSTS_SUBSCRIPTION = gql`
+  subscription newPost {
+    newPost {
       id
       body
       createdAt

@@ -29,7 +29,7 @@ const httpServer = createServer(app);
 
 const wsServer = new WebSocketServer({
   server: httpServer,
-  path: "/graphql",
+  path: "/subscriptions",
 });
 const serverCleanup = useServer({ schema }, wsServer);
 
