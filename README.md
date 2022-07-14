@@ -52,7 +52,7 @@ Frontend: `localhost:3000`
 
 To Visit App With remote host:
 
-Frontend: `https://mern-next-104p6hs93-ji123mmy.vercel.app`  (Host: Vercel)
+Frontend: `https://mern-next-ji123mmy.vercel.app`  (Host: Vercel)
 
 Backtend: `https://mern-graphql-server.herokuapp.com/graphql`(Host: Heroku)
 
