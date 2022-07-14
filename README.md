@@ -3,9 +3,13 @@
 CRUD Posts 
 
 An application used to simple Crud post  built with: 
+
 Frontend: React, Redux, NextJs Graphql
+
 Backend: NodeJs, Express, MongDB Graphql
+
 CI: vitest
+
 CD: Vercel
 
 ## Project Status
